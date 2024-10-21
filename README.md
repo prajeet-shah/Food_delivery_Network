@@ -19,3 +19,30 @@
 - HTTPs
 - Tree shaking -> remove unused code
 - Different dev and prod build
+
+
+# Food ordering App Layout
+
+/**
+ * Header
+ * -Logo
+ * -NavItems
+ *
+ * Body
+ * -Search
+ * -Restaurant-container
+ *  -Restaurantcard
+ *   -Name , price , cuisine ,delivery time , rating
+ * Footer
+ * -copyright
+ * -Links
+ * -Address
+ *
+ *
+ */
+
+
+ # React Hooks
+ - (Normal Js utility function)
+ - UseState
+ - UseEffect
