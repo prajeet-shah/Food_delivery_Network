@@ -1,6 +1,9 @@
+import { useState } from "react";
 import image from "../pictures/applogo.png";
 
 const Header = () => {
+  const [btnName, setBtnName] = useState("Login");
+
   return (
     <div className="header">
       <div className="logo-container">
@@ -13,6 +16,17 @@ const Header = () => {
             <li>About</li>
             <li>Contact us</li>
             <li>Cart</li>
+            <button
+              className="login-btn"
+              onClick={() => {
+                btnName === "Login"
+                  ? setBtnName("Logout")
+                  : setBtnName("Login");
+                console.log(btnName);
+              }}
+            >
+              {btnName}
+            </button>
           </ul>
         </nav>
       </div>
