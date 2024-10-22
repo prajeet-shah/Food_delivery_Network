@@ -5,6 +5,8 @@ import { APP_API } from "../utils/constants";
 
 const Body = () => {
   const [listofcards, setListofcards] = useState([]);
+  const [filterRestaurant, setFilterRestaurant] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
   useEffect(() => {
     fetchData();
@@ -15,8 +17,9 @@ const Body = () => {
     let data = await fetch(APP_API);
 
     let json = await data.json();
-    console.log(json.data.cards);
+    // console.log(json.data.cards);
     setListofcards(json?.data?.cards?.slice(3));
+    setFilterRestaurant(json?.data?.cards?.slice(3));
   };
 
   console.log("body rendered");
@@ -30,6 +33,30 @@ const Body = () => {
     <Shimmer />
   ) : (
     <div className="body">
+      <div className="search">
+        <input
+          type="text"
+          className="search-box"
+          value={searchText}
+          onChange={(e) => {
+            setSearchText(e.target.value);
+          }}
+        ></input>
+        <button
+          onClick={() => {
+            // filter by search text
+            filterItem = listofcards.filter((res) =>
+              res.card.card.info.name
+                .toLowerCase()
+                .includes(searchText.toLowerCase())
+            );
+            setFilterRestaurant(filterItem);
+            console.log(searchText);
+          }}
+        >
+          search
+        </button>
+      </div>
       <div>
         <span
           className="restaurant-btn"
@@ -46,7 +73,7 @@ const Body = () => {
         </span>
       </div>
       <div className="res-container">
-        {listofcards.map((restaurant) => (
+        {filterRestaurant.map((restaurant) => (
           <RestaurantCard
             key={restaurant.card.card.info.id}
             cards={restaurant}
