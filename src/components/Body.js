@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
+import { APP_API } from "../utils/constants";
 
 const Body = () => {
   const [listofcards, setListofcards] = useState([]);
@@ -11,9 +12,7 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    let data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=20.27060&lng=85.83340&collection=83639&tags=layout_CCS_Biryani&sortBy=&filters=&type=rcv2&offset=0&page_type=null"
-    );
+    let data = await fetch(APP_API);
 
     let json = await data.json();
     console.log(json.data.cards);
