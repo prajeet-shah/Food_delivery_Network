@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { APP_API } from "../utils/constants";
+import { Link } from "react-router";
+import useOnlineStatus from "../utils/useOnlineStatus";
 
 const Body = () => {
   const [listofcards, setListofcards] = useState([]);
@@ -10,24 +12,39 @@ const Body = () => {
 
   useEffect(() => {
     fetchData();
-    console.log("useEffect");
+    // console.log("useEffect");
   }, []);
 
   const fetchData = async () => {
     let data = await fetch(APP_API);
 
     let json = await data.json();
-    // console.log(json.data.cards);
-    setListofcards(json?.data?.cards?.slice(3));
-    setFilterRestaurant(json?.data?.cards?.slice(3));
+    // console.log(
+    //   json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
+    // );
+    setListofcards(
+      json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
+    );
+    setFilterRestaurant(
+      json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
+    );
   };
 
-  console.log("body rendered");
+  // console.log("body rendered");
 
   //conditional rendering
   // if (listofcards.length === 0) {
   //   return <Shimmer />;
   // }
+
+  const onlineStatus = useOnlineStatus();
+
+  if(onlineStatus === false)
+  return (
+    <h1>you're offline, Please check your internet connection!</h1>
+  )
+
+  
 
   return listofcards.length === 0 ? (
     <Shimmer />
@@ -46,10 +63,9 @@ const Body = () => {
           onClick={() => {
             // filter by search text
             filterItem = listofcards.filter((res) =>
-              res.card.card.info.name
-                .toLowerCase()
-                .includes(searchText.toLowerCase())
+              res?.info?.name?.toLowerCase().includes(searchText.toLowerCase())
             );
+
             setFilterRestaurant(filterItem);
             console.log(searchText);
           }}
@@ -63,9 +79,9 @@ const Body = () => {
           onClick={() => {
             // filter
             const filterItem = listofcards.filter(
-              (res) => res.card.card.info.avgRating > 4
+              (res) => res.info.avgRating > 4.5
             );
-            setListofcards(filterItem);
+            setFilterRestaurant(filterItem);
             console.log(filterItem);
           }}
         >
@@ -74,10 +90,12 @@ const Body = () => {
       </div>
       <div className="res-container">
         {filterRestaurant.map((restaurant) => (
-          <RestaurantCard
-            key={restaurant.card.card.info.id}
-            cards={restaurant}
-          />
+          <Link
+            key={restaurant.info.id}
+            to={"/restaurant/" + restaurant.info.id}
+          >
+            <RestaurantCard cards={restaurant} />
+          </Link>
         ))}
       </div>
     </div>

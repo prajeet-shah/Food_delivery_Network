@@ -1,9 +1,9 @@
 import APP_URL from "../utils/constants";
 const RestaurantCard = (props) => {
-  // console.log(props.cards.card.card.info);
+  // console.log(props.cards.info);
   const { name, price, cuisines, avgRating, cloudinaryImageId } =
-    props?.cards?.card?.card?.info;
-  const { deliveryTime } = props?.cards?.card?.card?.info?.sla;
+    props?.cards?.info;
+  const { deliveryTime } = props?.cards?.info?.sla;
 
   return (
     <div className="res-card">
