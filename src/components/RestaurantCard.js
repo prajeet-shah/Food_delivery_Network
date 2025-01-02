@@ -1,5 +1,5 @@
 import APP_URL from "../utils/constants";
-const RestaurantCard = (props, loggedInUser) => {
+const RestaurantCard = (props) => {
   // console.log(props);
   const { name, price, cuisines, avgRating, cloudinaryImageId } =
     props?.cards?.info;
@@ -13,7 +13,7 @@ const RestaurantCard = (props, loggedInUser) => {
       <h2>{cuisines.slice(2).join(",")}</h2>
       <h2>{avgRating} rating</h2>
       <h2>{deliveryTime} minutes</h2>
-      <h2>{loggedInUser}</h2>
+      
     </div>
   );
 };

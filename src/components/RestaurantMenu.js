@@ -33,7 +33,7 @@ const RestaurantMenu = () => {
         c.card.card["@type"] ==
         "type.googleapis.com/swiggy.presentation.food.v2.NestedItemCategory"
     );
-  console.log(categories);
+  // console.log(categories);
   // console.log(nestedCategories)
 
   return (

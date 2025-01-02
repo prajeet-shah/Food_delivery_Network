@@ -1,17 +1,17 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
 import { APP_API } from "../utils/constants";
 import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
-import userContext from "../utils/userContext";
+
 
 const Body = () => {
   const [listofcards, setListofcards] = useState([]);
   const [filterRestaurant, setFilterRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
 
-  const { loggedInUser } = useContext(userContext);
+  
   useEffect(() => {
     fetchData();
     // console.log("useEffect");
@@ -21,16 +21,16 @@ const Body = () => {
     let data = await fetch(APP_API);
 
     let json = await data.json();
-    console.log(
-      json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
-    );
+    // console.log(
+    //   json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
+    // );
     setListofcards(
       json?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
+        ?.restaurants || {}
     );
     setFilterRestaurant(
       json?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants
+        ?.restaurants || {}
     );
   };
 
@@ -100,7 +100,7 @@ const Body = () => {
             key={restaurant.info.id}
             to={"/restaurant/" + restaurant.info.id}
           >
-            <RestaurantCard cards={restaurant} loggedInUser={loggedInUser} />
+            <RestaurantCard cards={restaurant} />
           </Link>
         ))}
       </div>
