@@ -46,3 +46,39 @@
  - (Normal Js utility function)
  - UseState
  - UseEffect
+
+
+
+
+# types of testings(developer)
+- unit Testing
+- Integration Testing
+- End to End Testing - e2e Testings
+
+
+# Setting up Testing in our app
+- Install React Testing library
+- install Jest
+- Install babel dependencies
+- configure babel (babel.config.js is created)
+- configure parcel config file to disable default babel transpilation(.parcel is created)
+- Jest configuration  => npx jest --init (jest.config.js is created)
+- Install jsdom library
+- install @babel/preset-react
+- add @babel/preset-react to babel.config.js to make jsx work in test cases.
+- install @testing-library/jest-dom
+
+# toBeInTheDocument expects a single HTMLElement 
+- if expects contains more than one element then it should be iterate using
+- map or forEach method to each element
+
+# Testing in Header component
+- 1. Error with direct image
+- because JavaScript and Babel don't know how to process image files (like .png) directly
+- solution: add this file to the root of the project __mocks__/fileMock.js (fileMock.js is created)
+- include module.exports = 'test-file-stub'; int the fileMock.js
+- update the jest.config.js file with 
+-  moduleNameMapper: {
+-    '\\.(jpg|jpeg|png|gif|svg)$': '<rootDir>/__mocks__/fileMock.js',
+-  },
+
