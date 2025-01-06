@@ -5,13 +5,11 @@ import { APP_API } from "../utils/constants";
 import { Link } from "react-router";
 import useOnlineStatus from "../utils/useOnlineStatus";
 
-
 const Body = () => {
   const [listofcards, setListofcards] = useState([]);
   const [filterRestaurant, setFilterRestaurant] = useState([]);
   const [searchText, setSearchText] = useState("");
 
-  
   useEffect(() => {
     fetchData();
     // console.log("useEffect");
@@ -21,15 +19,15 @@ const Body = () => {
     let data = await fetch(APP_API);
 
     let json = await data.json();
-    // console.log(
-    //   json.data.cards[1].card.card.gridElements.infoWithStyle.restaurants
-    // );
+    console.log(
+      json.data.cards[2].card.card.gridElements.infoWithStyle.restaurants
+    );
     setListofcards(
-      json?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
+      json?.data?.cards?.[2]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants || {}
     );
     setFilterRestaurant(
-      json?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
+      json?.data?.cards?.[2]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants || {}
     );
   };
