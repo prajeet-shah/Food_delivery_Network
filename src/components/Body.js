@@ -23,12 +23,18 @@ const Body = () => {
     //   json.data.cards[2].card.card.gridElements.infoWithStyle.restaurants
     // );
     setListofcards(
-      json?.data?.cards?.[2]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants || {}
+      json?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants ||
+        json?.data?.cards?.[2]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants ||
+        {}
     );
     setFilterRestaurant(
-      json?.data?.cards?.[2]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants || {}
+      json?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle
+        ?.restaurants ||
+        json?.data?.cards?.[2]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants ||
+        {}
     );
   };
 
